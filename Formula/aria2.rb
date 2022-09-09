@@ -6,10 +6,15 @@ class Aria2 < Formula
   sha256 "58d1e7608c12404f0229a3d9a4953d0d00c18040504498b483305bcb3de907a5"
   license "GPL-2.0-or-later"
 
+  option "with-c-ares", "Enable c-ares support"
+  option "with-openssl", "Use OpenSSL instead of Apple TLS" if OS.mac?
+
   depends_on "pkg-config" => :build
   depends_on "gettext"
   depends_on "libssh2"
   depends_on "sqlite"
+
+  depends_on "c-ares" => :optional
 
   uses_from_macos "libxml2"
   uses_from_macos "zlib"
@@ -19,12 +24,8 @@ class Aria2 < Formula
   end
 
   on_macos do
-    option "with-openssl", "Use OpenSSL instead of Apple TLS"
     depends_on "openssl@1.1" => :optional
   end
-
-  option "with-c-ares", "Enable c-ares support"
-  depends_on "c-ares" => :optional
 
   def install
     ENV.cxx11
