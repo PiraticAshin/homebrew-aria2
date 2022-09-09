@@ -13,18 +13,17 @@ class Aria2 < Formula
   depends_on "gettext"
   depends_on "libssh2"
   depends_on "sqlite"
-
   depends_on "c-ares" => :optional
 
   uses_from_macos "libxml2"
   uses_from_macos "zlib"
 
-  on_linux do
-    depends_on "openssl@1.1"
-  end
-
   on_macos do
     depends_on "openssl@1.1" => :optional
+  end
+
+  on_linux do
+    depends_on "openssl@1.1"
   end
 
   def install
@@ -39,7 +38,6 @@ class Aria2 < Formula
       --without-libnettle
       --without-libgcrypt
     ]
-    
     if OS.mac?
       if build.with? "openssl@1.1"
         ENV.prepend_path "PKG_CONFIG_PATH", Formula["openssl@1.1"].opt_lib/"pkgconfig"
