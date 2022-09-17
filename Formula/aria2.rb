@@ -8,8 +8,8 @@ class Aria2 < Formula
 
   depends_on "pkg-config" => :build
   depends_on "gettext"
-  depends_on "libssh2"
   depends_on "c-ares"  # Homebrew提供的aria2不提供c-ares依赖。
+  depends_on "libssh2"
   depends_on "sqlite"
 
   uses_from_macos "libxml2"
