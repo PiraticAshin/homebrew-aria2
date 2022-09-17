@@ -10,7 +10,7 @@ class Aria2 < Formula
   depends_on "gettext"
   depends_on "libssh2"
   depends_on "sqlite"
-  depends_on "c-ares"  # Homebrew's aria2 don't provide c-ares dependency
+  depends_on "c-ares"  # Homebrew提供的aria2不提供c-ares依赖。
 
   uses_from_macos "libxml2"
   uses_from_macos "zlib"
@@ -26,6 +26,7 @@ class Aria2 < Formula
       --disable-dependency-tracking
       --prefix=#{prefix}
       --with-libssh2
+      --with-libcares
       --without-gnutls
       --without-libgmp
       --without-libnettle
@@ -38,8 +39,6 @@ class Aria2 < Formula
       args << "--without-appletls"
       args << "--with-openssl"
     end
-
-    args << "--with-libcares" if build.with?("c-ares")
 
     system "./configure", *args
     system "make", "install"
